@@ -61,16 +61,10 @@ def listar_reunioes():
             reunioes_dict[data_reuniao] += f' - {titulo}'
     return reunioes_dict
 
-# INICIALIZAZAO =====================
-#def inicializacao():
-   #if not 'api_key' in st.session_state:
-       # st.session_state.api_key = []
 
-# OPENAI UTILS =====================
-client = openai.OpenAI()
-
+# OPENAI UTILS ====================
 def transcreve_audio(openai_key, caminho_audio, language='pt', response_format='text'):
-    openai.api_key = openai_key
+    client = openai.OpenAI(st.session_state['api_key'])
     with open(caminho_audio, 'rb') as arquivo_audio:
         transcricao = client.audio.transcriptions.create(
             model='whisper-1',
@@ -85,7 +79,7 @@ def chat_openai(
         mensagem,
         modelo='gpt-3.5-turbo-1106',
     ):
-    openai.api_key = openai_key
+    client = openai.OpenAI(st.session_state['api_key'])
     mensagens = [{'role': 'user', 'content': mensagem}]
     resposta = client.chat.completions.create(
         model=modelo,
@@ -209,6 +203,10 @@ def tab_configuracao():
 
 # MAIN =====================
 def main():
+    
+    if 'api_key' not in st.session_state:
+        st.session_state['api_key'] = []
+    
     st.header('Bem-vindo ao MeetGPT - Transcrição de Reuniões 🎙️', divider=True)
     tab_gravar, tab_selecao, tab_configurar = st.tabs(['Gravar Nova Reunião', 'Ver Transcrições/Reuniões Salvas', 'Configuração da API KEY'])
     with tab_gravar:
