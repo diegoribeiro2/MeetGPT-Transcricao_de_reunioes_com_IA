@@ -64,7 +64,8 @@ def listar_reunioes():
 
 # OPENAI UTILS ====================
 def transcreve_audio(openai_key, caminho_audio, language='pt', response_format='text'):
-    client = openai.OpenAI(st.session_state['api_key'])
+    # Cria um client do OpenAI usando a chave passada como argumento
+    client = openai.OpenAI(api_key=openai_key)
     with open(caminho_audio, 'rb') as arquivo_audio:
         transcricao = client.audio.transcriptions.create(
             model='whisper-1',
@@ -74,17 +75,15 @@ def transcreve_audio(openai_key, caminho_audio, language='pt', response_format='
         )
     return transcricao
 
-def chat_openai(
-        openai_key,
-        mensagem,
-        modelo='gpt-3.5-turbo-1106',
-    ):
-    client = openai.OpenAI(st.session_state['api_key'])
+
+def chat_openai(openai_key, mensagem, modelo='gpt-3.5-turbo-1106'):
+    # Cria um client do OpenAI usando a chave passada como argumento
+    client = openai.OpenAI(api_key=openai_key)
     mensagens = [{'role': 'user', 'content': mensagem}]
     resposta = client.chat.completions.create(
         model=modelo,
         messages=mensagens,
-        )
+    )
     return resposta.choices[0].message.content
 
 # TAB GRAVA REUNIÃO =====================
@@ -189,10 +188,11 @@ def tab_configuracao():
     api_key = st.text_input(
         "Adicione sua API KEY da OpenAI:",
         type="password",
-        value=st.session_state.get("api_key", "")
+        value=st.session_state.get("api_key", ""),
+        key="input_api_key"  #  key única
     )
 
-    if st.button("Salvar"):
+    if st.button("Salvar", key="btn_salvar_api"):  #  key única
         if api_key:
             st.session_state["api_key"] = api_key
             st.success("✅ Chave salva com sucesso!")
@@ -205,7 +205,7 @@ def tab_configuracao():
 def main():
     
     if 'api_key' not in st.session_state:
-        st.session_state['api_key'] = []
+        st.session_state['api_key'] = ""
     
     st.header('Bem-vindo ao MeetGPT - Transcrição de Reuniões 🎙️', divider=True)
     tab_gravar, tab_selecao, tab_configurar = st.tabs(['Gravar Nova Reunião', 'Ver Transcrições/Reuniões Salvas', 'Configuração da API KEY'])
