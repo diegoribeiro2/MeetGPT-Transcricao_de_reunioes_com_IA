@@ -1,0 +1,8 @@
+Resumo reunião:
+Discussão sobre novos modelos LLM, incluindo tradução automática, eficiência de treinamento, expansão para novos setores e melhoria da interface do usuário.
+
+Acordos da Reunião:
+- Explorar parcerias internacionais para aprimorar a tradução automática
+- Investigar técnicas de transferência de aprendizado para acelerar o treinamento de modelos
+- Formar equipes especializadas para adaptar os modelos a setores específicos
+- Investir em uma interface mais intuitiva e amigável com interação por voz e sugestões contextuais
