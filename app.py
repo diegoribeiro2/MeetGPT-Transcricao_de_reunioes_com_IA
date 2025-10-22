@@ -208,13 +208,13 @@ def main():
         st.session_state['api_key'] = ""
     
     st.header('Bem-vindo ao MeetGPT - Transcrição de Reuniões 🎙️', divider=True)
-    tab_gravar, tab_selecao, tab_configurar = st.tabs(['Gravar Nova Reunião', 'Ver Transcrições/Reuniões Salvas', 'Configuração da API KEY'])
+    tab_configurar, tab_gravar, tab_selecao = st.tabs(['Configuração da API KEY', 'Gravar Nova Reunião', 'Ver Transcrições/Reuniões Salvas'])
+    with tab_configurar:
+        tab_configuracao()
     with tab_gravar:
         tab_grava_reuniao()
     with tab_selecao:
         tab_selecao_reuniao()
-    with tab_configurar:
-        tab_configuracao()
 
 if __name__ == '__main__':
     main()
