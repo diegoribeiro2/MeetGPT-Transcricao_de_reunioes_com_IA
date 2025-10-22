@@ -4,4 +4,3 @@ python-dotenv
 streamlit
 streamlit_webrtc
 pydub
-pyaudioop
