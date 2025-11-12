@@ -3,7 +3,7 @@
 Bem-vindo ao repositório do **MeetGPT**, um projeto prático e robusto que desenvolvi para transformar a maneira como documentamos e analisamos reuniões corporativas.
 Acesse a aplicação :
 
-🔗 **Acesse o aplicativo aqui:** [Acesse a aplicação aqui](https://transcricao-de-reunioes-diego.streamlit.app/)
+🔗 **Acesse o aplicativo aqui:** [transcricao-de-reunioes-diego.streamlit.app](https://transcricao-de-reunioes-diego.streamlit.app/)
 
 ---
 
